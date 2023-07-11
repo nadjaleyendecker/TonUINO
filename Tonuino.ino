@@ -638,15 +638,15 @@ byte trailerBlock = 7;
 MFRC522::StatusCode status;
 
 #define buttonPause A0
-#define buttonUp A2
-#define buttonDown A1
+#define buttonUp A4
+#define buttonDown A3
 #define busyPin 13
 #define shutdownPin 27
 #define openAnalogPin A7
 
 #ifdef FIVEBUTTONS
-#define buttonFourPin A4
-#define buttonFivePin A3
+#define buttonFourPin A2
+#define buttonFivePin A1
 #endif
 
 #define LONG_PRESS 1000
@@ -1008,7 +1008,7 @@ void loop() {
     if (upButton.pressedFor(LONG_PRESS)) {
 #ifndef FIVEBUTTONS
       if (isPlaying()) {
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           volumeUpButton();
         }
         else {
@@ -1022,7 +1022,7 @@ void loop() {
 #endif
     } else if (upButton.wasReleased()) {
       if (!ignoreUpButton)
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           nextButton();
         }
         else {
@@ -1034,7 +1034,7 @@ void loop() {
     if (downButton.pressedFor(LONG_PRESS)) {
 #ifndef FIVEBUTTONS
       if (isPlaying()) {
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           volumeDownButton();
         }
         else {
@@ -1048,7 +1048,7 @@ void loop() {
 #endif
     } else if (downButton.wasReleased()) {
       if (!ignoreDownButton) {
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           previousButton();
         }
         else {
@@ -1060,7 +1060,7 @@ void loop() {
 #ifdef FIVEBUTTONS
     if (buttonFour.wasReleased()) {
       if (isPlaying()) {
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           volumeUpButton();
         }
         else {
@@ -1073,7 +1073,7 @@ void loop() {
     }
     if (buttonFive.wasReleased()) {
       if (isPlaying()) {
-        if (!mySettings.invertVolumeButtons) {
+        if (mySettings.invertVolumeButtons) {
           volumeDownButton();
         }
         else {

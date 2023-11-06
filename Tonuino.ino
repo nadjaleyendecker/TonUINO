@@ -955,6 +955,14 @@ void loop() {
     // doppelt belegt werden
     readButtons();
 
+    // switch off
+    if ((buttonFour.pressedFor(LONG_PRESS) || buttonFive.pressedFor(LONG_PRESS)) && buttonFour.isPressed() && buttonFive.isPressed()) {
+      Serial.println("=== power off!");
+      // enter sleep state
+      digitalWrite(shutdownPin, LOW);
+      break;
+    }
+
     // admin menu
     if ((pauseButton.pressedFor(LONG_PRESS) || upButton.pressedFor(LONG_PRESS) || downButton.pressedFor(LONG_PRESS)) && pauseButton.isPressed() && upButton.isPressed() && downButton.isPressed()) {
       mp3.pause();
